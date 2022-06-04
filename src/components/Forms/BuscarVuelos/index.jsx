@@ -1,42 +1,18 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { styled } from '@mui/material/styles'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
+
+import { mensajes, villetes } from '@/const/index'
+
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded'
-import Autocomplete from '@mui/material/Autocomplete'
-
-// hooks
-import useAeropuertos from '@/hooks/useAeropuertos'
-
-// @/const
-import { villetes, mensajes } from '@/const/index'
-
-// @/components
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import CustomSelect from '@/components/Select'
+import Grid from '@mui/material/Grid'
 import SelectAutocomplete from '@/components/SelectAutocomplete'
-import CustomButton from '@/components/Button'
-
-const CssTextField = styled(TextField)({
-	'& label.Mui-focused': {
-		color: '#8717ff',
-	},
-	'& .MuiInput-underline:after': {
-		borderBottomColor: '#8717ff',
-	},
-	'& .MuiOutlinedInput-root': {
-		'& fieldset': {
-			borderColor: 'red',
-		},
-		'&.Mui-focused fieldset': {
-			borderColor: '#8717ff',
-		},
-	},
-})
+import TextField from '@mui/material/TextField'
+import useAeropuertos from '@/hooks/useAeropuertos'
+import { useFormik } from 'formik'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 const BuscarVuelos = () => {
 	const navigate = useNavigate()
@@ -57,11 +33,14 @@ const BuscarVuelos = () => {
 			.required(mensajes.MAXIMO_PASAJEROS),
 	})
 
+	const date = new Date()
+	const [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()]
+
 	const formik = useFormik({
 		initialValues: {
 			origen: '',
 			destino: '',
-			fIda: '2022-01-01', // fecha actual
+			fIda: `${year}-${month + 1}-${day}`, // fecha actual minimo
 			fVuelta: '',
 			pasajeros: '1',
 		},
@@ -101,12 +80,13 @@ const BuscarVuelos = () => {
 					<Grid item xs={12} lg={4} order={{ xs: 4, lg: 3 }}>
 						<Grid container>
 							<Grid item xs={villete == villetes.IDA_Y_VUELTA ? 6 : 12} lg={villete == villetes.IDA_Y_VUELTA ? 6 : 12}>
-								<CssTextField
+								<TextField
 									fullWidth
 									id="fIda"
 									name="fIda"
 									type="date"
 									label="Fecha de ida"
+									min={`${year}-${month + 1}-${day}`}
 									variant="standard"
 									size="small"
 									value={formik.values.fIda}
@@ -121,7 +101,7 @@ const BuscarVuelos = () => {
 
 							{villete == villetes.IDA_Y_VUELTA ? (
 								<Grid item xs={6}>
-									<CssTextField
+									<TextField
 										fullWidth
 										id="fVuelta"
 										name="fVuelta"
@@ -143,7 +123,8 @@ const BuscarVuelos = () => {
 					</Grid>
 					<Grid item xs={12} md={6} lg={2} order={{ xs: 5, lg: 4 }}>
 						<Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-							<CssTextField
+							<TextField
+								disabled
 								fullWidth
 								id="pasajeros"
 								name="pasajeros"
@@ -158,12 +139,15 @@ const BuscarVuelos = () => {
 								InputLabelProps={{
 									shrink: true,
 								}}
+								inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
 							/>
 							<AccountCircleRoundedIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
 						</Box>
 					</Grid>
 					<Grid item xs={12} lg={2} order={{ xs: 6, lg: 5 }}>
-						<CustomButton text="Buscar" />
+						<Button type="submit" variant="contained">
+							Buscar
+						</Button>
 					</Grid>
 				</Grid>
 			</form>

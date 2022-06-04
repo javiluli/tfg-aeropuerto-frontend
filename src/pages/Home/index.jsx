@@ -1,41 +1,37 @@
-import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-
-// @/components
-import Header from '@/components/Header'
 import BuscarVuelos from '@/components/Forms/BuscarVuelos'
+import Container from '@mui/material/Container'
+import Header from '@/components/Header'
+import Typography from '@mui/material/Typography'
 
 const Home = () => {
 	return (
-		<div>
+		<Box>
 			<Header />
 
-			<Box sx={{ position: 'relative', zIndex: 1000 }}>
-				<Box sx={{ px: 2, my: 6 }}>
-					<Container maxWidth="lg" sx={{ p: 2, boxShadow: 3 }}>
-						<Box component="div">
-							<Typography
-								align="left"
-								variant="h4"
-								component="h1"
-								fontWeight="700"
-								style={{
-									color: 'transparent',
-									marginBottom: '1em',
-									backgroundImage: 'linear-gradient(90deg, rgba(135,23,255,1) 0%, rgba(96,0,199,1) 100%)',
-									backgroundClip: 'text',
-								}}
-							>
-								Buscar vuelos
-							</Typography>
+			<Box sx={{ px: 5, py: 10 }}>
+				<Container maxWidth="xl">
+					<Box component="div" sx={{ px: 5, py: 3, boxShadow: 3, backgroundColor: 'background.default' }}>
+						<Typography
+							align="left"
+							variant="h3"
+							component="h1"
+							fontWeight="700"
+							style={{
+								color: 'transparent',
+								backgroundImage: 'linear-gradient(90deg, hsl(270, 95%, 60%) 0%, hsl(270, 85%, 40%)',
+								WebkitBackgroundClip: 'text',
+								backgroundClip: 'text',
+							}}
+						>
+							Buscar vuelos
+						</Typography>
 
-							<BuscarVuelos />
-						</Box>
-					</Container>
-				</Box>
+						<BuscarVuelos />
+					</Box>
+				</Container>
 			</Box>
-		</div>
+		</Box>
 	)
 }
 export default Home

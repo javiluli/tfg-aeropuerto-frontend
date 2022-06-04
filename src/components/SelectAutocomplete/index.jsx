@@ -1,10 +1,9 @@
-import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 
 export default function Grouped({ id, data, formik }) {
 	const options = data.map((option) => {
-		const firstLetter = option.pais[0].toUpperCase()
+		const firstLetter = option.ciudad[0].toUpperCase()
 		return {
 			firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
 			...option,
@@ -15,6 +14,7 @@ export default function Grouped({ id, data, formik }) {
 		<Autocomplete
 			fullWidth
 			id={id}
+			size="small"
 			options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
 			groupBy={(option) => option.firstLetter}
 			getOptionLabel={(option) => `${option.ciudad} (${option.idAeropuerto})`}
@@ -26,7 +26,6 @@ export default function Grouped({ id, data, formik }) {
 					name={id}
 					label={id.toUpperCase()}
 					variant="standard"
-					size="small"
 					value={formik.values.origen}
 					onChange={formik.handleChange}
 					error={formik.touched.origen && Boolean(formik.errors.origen)}
