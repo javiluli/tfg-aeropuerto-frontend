@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
-import InputField from '../InputField'
+import InputField from '@/components/InputField/InputField'
 import Typography from '@mui/material/Typography'
 
 const SeccionRegistros = () => {

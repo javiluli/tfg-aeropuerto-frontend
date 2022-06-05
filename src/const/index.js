@@ -18,4 +18,5 @@ export const mensajes = {
 const URL_BASE = 'http://localhost:8080/api/v1'
 export const urls = {
 	GET_AEROPUERTOS: `${URL_BASE}/aeropuertos`,
+	GET_PASAJERO_Y_RESERVA: `${URL_BASE}/pasajero`,
 }
