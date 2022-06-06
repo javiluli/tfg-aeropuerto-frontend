@@ -1,5 +1,6 @@
-function getPasajeroConReserva(idReserva) {
-	const URL = `http://localhost:8080/api/v1/pasajero/${idReserva}`
+function getFilasByNombreModelo(modeloAvion) {
+	const URL = `http://localhost:8080/api/v1/filas/${modeloAvion}`
+
 	const fetchData = {
 		method: 'GET',
 		headers: {
@@ -13,12 +14,13 @@ function getPasajeroConReserva(idReserva) {
 		.then((res) => {
 			if (res || !/^\s*$/.test(res)) {
 				let data = JSON.parse(res)
-				// const { reserva, nombre, apellidos, dni, email } = data
-				// return { reserva, nombre, apellidos, dni, email }
+				// const { numeroFila, cantidadAsientos } = data
+				// return { numeroFila, cantidadAsientos }
+				console.log(data)
 				return data
 			}
 			return null
 		})
 }
 
-export default getPasajeroConReserva
+export default getFilasByNombreModelo
