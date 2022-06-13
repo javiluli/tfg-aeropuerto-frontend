@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from '@mui/material'
+import { ThemeProvider, createTheme } from '@mui/material'
 import { createContext, useMemo, useState } from 'react'
 
 export const ColorModeContext = createContext({
@@ -11,6 +11,10 @@ const themeObj = {
 		primary: {
 			main: 'hsl(270, 95%, 60%)',
 		},
+		background: {
+			default: 'hsl(0, 0%, 100%)',
+			paper: 'hsl(0, 0%, 98%)',
+		},
 	},
 
 	dark: {
@@ -18,8 +22,8 @@ const themeObj = {
 			main: '#8717ff',
 		},
 		background: {
-			default: '#1e1e1e',
-			paper: '#121212',
+			default: 'hsl(0, 0%, 12%)',
+			paper: 'hsl(0, 0%, 7%)',
 		},
 	},
 }

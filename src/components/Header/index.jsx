@@ -1,9 +1,19 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import Typography from '@mui/material/Typography'
-
-// @/components
 import CustomizedSwitches from '@/components/Switch'
+import { Link } from 'react-router-dom'
+import StarRoundedIcon from '@mui/icons-material/StarRounded'
+import SvgIcon from '@mui/material/SvgIcon'
+import Typography from '@mui/material/Typography'
+import { pink } from '@mui/material/colors'
+import { useState } from 'react'
+
+function StarIcon(props) {
+	return (
+		<SvgIcon {...props}>
+			{/* <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /> */}
+			<StarRoundedIcon />
+		</SvgIcon>
+	)
+}
 
 const Navegation = () => {
 	const [open, setOpen] = useState(false)
@@ -13,17 +23,17 @@ const Navegation = () => {
 			title: 'Inicio',
 		},
 		{
-			link: '/check-in',
+			link: '/checkin',
 			title: 'Check-in',
 		},
 		{
-			link: '/gestion-reservas',
-			title: 'Reservas',
+			link: '/reserva',
+			title: 'Reserva',
 		},
-		{
-			link: '/tarjeta-embarque',
-			title: 'Embarque',
-		},
+		// {
+		// 	link: '/tarjeta-embarque',
+		// 	title: 'Embarque',
+		// },
 	]
 
 	return (
@@ -87,6 +97,13 @@ const Navegation = () => {
 									<Typography>{title}</Typography>
 								</Link>
 							))}
+							<Link
+								key={'valoracion'}
+								to={'/valoracion'}
+								className="px-2 py-2 text-sm font-medium text-right rounded-full text-slate-700 hover:bg-[#fffff0] transition"
+							>
+								<StarIcon sx={{ color: '#FAAF00' }} />
+							</Link>
 						</nav>
 
 						<span className="block w-full h-0.5 md:w-0.5 md:h-full bg-[#F2F2F2]"></span>

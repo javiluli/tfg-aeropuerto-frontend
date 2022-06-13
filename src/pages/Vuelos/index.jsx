@@ -6,6 +6,7 @@ import MultiStepForm, { FormStep } from './MultiStepForm'
 import Box from '@mui/material/Box'
 import Container from '@mui/system/Container'
 import Header from '@/components/Header'
+import QRCode from 'react-qr-code'
 import SeccionRegistros from './SeccionRegistros'
 import SeccionVuelosIda from './SeccionVuelosIda'
 import SeccionVuelosVuelta from './SeccionVuelosVuelta'
@@ -58,6 +59,10 @@ const Vuelos = () => {
 	const [vueloIda, setVueloIda] = useState(null)
 	const [vueloVuelta, setVueloVuelta] = useState(null)
 
+	const [reservado, setReservado] = useState(false)
+
+	const [idReserva, setIdReserva] = useState(false)
+
 	return (
 		<Grid container spacing={6}>
 			<Grid item xs={12}>
@@ -69,7 +74,8 @@ const Vuelos = () => {
 					<MultiStepForm
 						initialValues={initialValues}
 						onSubmit={(values) => {
-							handleSubmit(values)
+							handleSubmit(values, setIdReserva)
+							setReservado(true)
 						}}
 					>
 						{/* Vuelos de ida */}
@@ -179,6 +185,20 @@ const Vuelos = () => {
 									</Grid>
 								) : null}
 							</Grid>
+
+							{reservado && (
+								<Box>
+									<Typography>Reserva completada! Su reserva se identifica con: {idReserva}</Typography>
+									<div style={{ height: 'auto', margin: '0 auto', maxWidth: 64, width: '100%' }}>
+										<QRCode
+											size={256}
+											style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
+											value={`http://localhost:3000/reserva?idreserva=${idReserva}`}
+											viewBox={`0 0 256 256`}
+										/>
+									</div>
+								</Box>
+							)}
 						</FormStep>
 					</MultiStepForm>
 				</Container>
@@ -208,10 +228,11 @@ function createPasajero(idReserva, nombre, apellidos, dni, email) {
 
 const randomID = () => Math.random().toString(36).substring(2, 10)
 
-const handleSubmit = (data) => {
+const handleSubmit = (data, onIdReserva) => {
 	const { vueloIda, vueloVuelta, nombre, apellidos, dni, email } = data
 
 	const idReservaIda = randomID()
+	onIdReserva(idReservaIda)
 	const newReservaIda = {
 		reserva: reservaObj(idReservaIda, vueloIda, new Date()),
 		pasajeros: [createPasajero(idReservaIda, nombre, apellidos, dni, email)],

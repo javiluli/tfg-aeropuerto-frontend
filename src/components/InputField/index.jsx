@@ -12,7 +12,7 @@ const InputField = ({ label, ...props }) => {
 			{...props}
 			error={meta.touched && Boolean(meta.error)}
 			helperText={meta.touched && meta.error}
-			style={{ marginBlock: '1em' }}
+			style={{ marginBlock: '0.25em' }}
 		/>
 	)
 }
