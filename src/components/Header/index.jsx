@@ -30,6 +30,10 @@ const Navegation = () => {
 			link: '/reserva',
 			title: 'Reserva',
 		},
+		{
+			link: '/dashboard',
+			title: 'Dashboard',
+		},
 		// {
 		// 	link: '/tarjeta-embarque',
 		// 	title: 'Embarque',
