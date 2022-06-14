@@ -1,10 +1,12 @@
-function getBusquedaVuelos(origen, destino, fechaIda) {
-	const now = new Date()
-	let timeNow = ''
+import { GET_VUELOS_BY__ORIGEN_AND_DESTINO_AND_FECHASALIDA_AND_HORASALIDA } from '@/const'
 
-	formatDate(now) === fechaIda
-		? (timeNow = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
-		: (timeNow = `00:00:00`)
+function getBusquedaVuelos(origen, destino, fechaSalida) {
+	const now = new Date()
+	let horaSalida = ''
+
+	formatDate(now) === fechaSalida
+		? (horaSalida = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
+		: (horaSalida = `00:00:00`)
 
 	const fetchData = {
 		method: 'GET',
@@ -14,9 +16,16 @@ function getBusquedaVuelos(origen, destino, fechaIda) {
 		},
 	}
 
-	const URL = `http://localhost:8080/api/v1/vuelosBySalidaAndLlegada?origen=${origen}&destino=${destino}&fechaSalida=${fechaIda}&horaSalida=${timeNow}`
+	const params = {
+		origen: origen,
+		destino: destino,
+		fechaSalida: fechaSalida,
+		horaSalida: horaSalida,
+	}
 
-	return fetch(URL, fetchData)
+	const url = GET_VUELOS_BY__ORIGEN_AND_DESTINO_AND_FECHASALIDA_AND_HORASALIDA(params)
+
+	return fetch(url, fetchData)
 		.then((response) => response.text())
 		.then((response) => {
 			let data = JSON.parse(response)

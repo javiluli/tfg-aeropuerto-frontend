@@ -1,5 +1,7 @@
+import { DELETE_RESERVA_BY__ID_RESERVA } from '@/const'
+
 function eliminarReserva(idReserva) {
-	const URL = `http://localhost:8080/api/v1/reserva/${idReserva}`
+	const url = DELETE_RESERVA_BY__ID_RESERVA(idReserva)
 
 	const fetchData = {
 		method: 'DELETE',
@@ -10,7 +12,7 @@ function eliminarReserva(idReserva) {
 		},
 	}
 
-	return fetch(URL, fetchData)
+	return fetch(url, fetchData)
 		.then((response) => response.text())
 		.then((response) => {
 			return true

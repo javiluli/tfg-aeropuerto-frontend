@@ -40,7 +40,7 @@ const initialValues = {
 	fechaYHoraalida: 0,
 }
 
-export const NewVueloForm = () => {
+const NewVueloForm = () => {
 	const { programas } = useProgramas()
 
 	const [programa, setPrograma] = useState('')
@@ -57,7 +57,6 @@ export const NewVueloForm = () => {
 
 	const handleSubmit = async (values) => {
 		const newVuelo = createVuelo(programa, fechaSalida, horaSalida, fechalegada, horaLlegada, plazasOcupadas)
-		console.log(newVuelo)
 	}
 
 	return (
@@ -114,7 +113,7 @@ export const NewVueloForm = () => {
 							<InputField name="plazasOcupadas" label="Cantidad de plazas ocupadas" value="0" size="small" disabled />
 						</Grid>
 
-						<Grid item xs={12}>
+						{/* <Grid item xs={12}>
 							<FormControl sx={{ minWidth: 120 }} size="small">
 								<InputLabel id="select-label-matriculaAvion">Avion</InputLabel>
 								<Select
@@ -125,15 +124,9 @@ export const NewVueloForm = () => {
 									label="Avion"
 									onChange={handleChangePrograma}
 								>
-									{programas &&
-										programas.map(({ idPrograma, origen, destino }) => (
-											<MenuItem key={idPrograma} value={idPrograma}>
-												{origen.ciudad} ({origen.idAeropuerto}) - {destino.ciudad} ({destino.idAeropuerto})
-											</MenuItem>
-										))}
 								</Select>
 							</FormControl>
-						</Grid>
+						</Grid> */}
 
 						<Grid item xs={12}>
 							<Button type="submit" variant="contained">
@@ -146,3 +139,5 @@ export const NewVueloForm = () => {
 		</Formik>
 	)
 }
+
+export default NewVueloForm

@@ -18,6 +18,10 @@ const checkin = (idVuelo, nombreModelo, numeroFila, letraAsiento, idReserva) => 
 
 const Asientos = ({ reserva }) => {
 	const { idReserva, vuelo, pasajeros, checkins, modeloAvion, filas } = reserva
+	console.log(reserva)
+	const { numeroFila, letraAsiento } = checkins.length > 0 ? checkins[0] : ''
+
+	const butacaOcupada = `${numeroFila}-${letraAsiento}`
 
 	const [checkinsRestante, setCheckinsRestante] = useState(0)
 	const [permitirCheckin, setPermitirCheckin] = useState(false)
@@ -73,6 +77,7 @@ const Asientos = ({ reserva }) => {
 								butacas={butacas}
 								onSelected={setAsientoSeleccionado}
 								selected={asientoSeleccionado}
+								butacaOcupada={butacaOcupada}
 							/>
 						))}
 					</Grid>
@@ -97,7 +102,7 @@ const ListOfPasajeros = ({ pasajeros }) => {
 	)
 }
 
-const Fila = ({ fila, butacas, selected, onSelected, allCkeckins, children }) => {
+const Fila = ({ fila, butacas, selected, onSelected, butacaOcupada, allCkeckins, children }) => {
 	return (
 		<Box>
 			<Grid container direction="row" alignItems="center">
@@ -106,6 +111,7 @@ const Fila = ({ fila, butacas, selected, onSelected, allCkeckins, children }) =>
 						id={`${fila}-${butaca}`}
 						asientoSeleccionado={selected}
 						onClick={() => onSelected(`${fila}-${butaca}`)}
+						onButacaOcupada={butacaOcupada}
 					>
 						<Typography variant="body2" component="span">
 							{`${fila}-${butaca}`}
@@ -117,8 +123,10 @@ const Fila = ({ fila, butacas, selected, onSelected, allCkeckins, children }) =>
 	)
 }
 
-const Butaca = ({ id, asientoSeleccionado, children, ...props }) => {
+const Butaca = ({ id, asientoSeleccionado, onButacaOcupada, children, ...props }) => {
 	const bgColor = asientoSeleccionado === id ? 'hsl(60, 100%, 75%)' : 'hsl(90, 100%, 75%)'
+	const bgColorDisabled = onButacaOcupada === id ? 'hsl(0, 100%, 75%)' : null
+
 	return (
 		<Grid item sx={{ p: 1 }}>
 			<Box
@@ -126,7 +134,7 @@ const Butaca = ({ id, asientoSeleccionado, children, ...props }) => {
 				sx={{
 					width: 40,
 					height: 40,
-					backgroundColor: bgColor,
+					backgroundColor: bgColorDisabled ?? bgColor,
 					borderRadius: '20px 20px 5px 5px',
 				}}
 				{...props}

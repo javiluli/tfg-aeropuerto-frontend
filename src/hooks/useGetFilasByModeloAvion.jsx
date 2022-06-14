@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { GET_FILAS_BY__MODELO_AVION } from '@/const'
 import axios from 'axios'
 
 function useGetFilasByModeloAvion(id) {
@@ -7,7 +8,7 @@ function useGetFilasByModeloAvion(id) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
 
-	const url = `http://localhost:8080/api/v1/filas/${id}`
+	const url = GET_FILAS_BY__MODELO_AVION(id)
 	const config = {
 		headers: {
 			'Access-Control-Allow-Origin': '*',

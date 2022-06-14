@@ -1,5 +1,8 @@
+import { GET_PASAJEROS_BY__ID_RESERVA } from '@/const'
+
 function getPasajeroConReserva(idReserva) {
-	const URL = `http://localhost:8080/api/v1/pasajero/${idReserva}`
+	const url = GET_PASAJEROS_BY__ID_RESERVA(idReserva)
+
 	const fetchData = {
 		method: 'GET',
 		headers: {
@@ -8,7 +11,7 @@ function getPasajeroConReserva(idReserva) {
 		},
 	}
 
-	return fetch(URL, fetchData)
+	return fetch(url, fetchData)
 		.then((res) => res.text())
 		.then((res) => {
 			if (res || !/^\s*$/.test(res)) {

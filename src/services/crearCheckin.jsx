@@ -1,7 +1,7 @@
-function crearCheckin(checkin) {
-	const URL = `http://localhost:8080/api/v1/checkin`
+import { POST_CHECKIN } from '@/const'
 
-	console.log(checkin)
+function crearCheckin(checkin) {
+	const url = POST_CHECKIN()
 
 	const fetchData = {
 		method: 'POST',
@@ -12,7 +12,7 @@ function crearCheckin(checkin) {
 		},
 	}
 
-	return fetch(URL, fetchData)
+	return fetch(url, fetchData)
 		.then((res) => res.text())
 		.then((res) => {
 			return true

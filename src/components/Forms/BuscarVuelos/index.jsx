@@ -40,7 +40,7 @@ const BuscarVuelos = () => {
 		initialValues: {
 			origen: '',
 			destino: '',
-			fIda: `${year}-${month + 1}-${day}`, // fecha actual minimo
+			fIda: '', // fecha actual minimo
 			fVuelta: '',
 			pasajeros: '1',
 		},
@@ -86,7 +86,7 @@ const BuscarVuelos = () => {
 									name="fIda"
 									type="date"
 									label="Fecha de ida"
-									min={`${year}-${month + 1}-${day}`}
+									min={new Date()}
 									variant="standard"
 									size="small"
 									value={formik.values.fIda}

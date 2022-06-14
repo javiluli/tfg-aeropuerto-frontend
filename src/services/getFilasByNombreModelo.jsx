@@ -1,5 +1,5 @@
 function getFilasByNombreModelo(modeloAvion) {
-	const URL = `http://localhost:8080/api/v1/filas/${modeloAvion}`
+	const URL = `https://proyecto-beyond.herokuapp.com/api/v1/filas/${modeloAvion}`
 
 	const fetchData = {
 		method: 'GET',

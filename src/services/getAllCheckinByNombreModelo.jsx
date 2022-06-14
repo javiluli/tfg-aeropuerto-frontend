@@ -1,5 +1,7 @@
+import { GET_ALL_CHECKINS_BY__ID_VUELO__AND__NOMBRE_MODELO } from '@/const'
+
 function getAllCheckinByNombreModelo(nombreModelo, idVuelo) {
-	const URL = `http://localhost:8080/api/v1/checkins/${nombreModelo}/${idVuelo}`
+	let url = GET_ALL_CHECKINS_BY__ID_VUELO__AND__NOMBRE_MODELO(nombreModelo, idVuelo)
 
 	const fetchData = {
 		method: 'GET',
@@ -9,7 +11,7 @@ function getAllCheckinByNombreModelo(nombreModelo, idVuelo) {
 		},
 	}
 
-	return fetch(URL, fetchData)
+	return fetch(url, fetchData)
 		.then((res) => res.text())
 		.then((res) => {
 			let data = JSON.parse(res)

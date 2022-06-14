@@ -30,8 +30,9 @@ function App() {
 					<Route path="/valoracion" element={<Valoracion />} />
 
 					{/* Rutas privadas del Admin */}
-					<Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}></Route>
-					<Route path="/dashboard" element={<Dashboard />} />
+					<Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+						<Route path="/dashboard" element={<Dashboard />} />
+					</Route>
 				</Route>
 			</Routes>
 		</Box>

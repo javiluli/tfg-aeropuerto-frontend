@@ -10,6 +10,7 @@ import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import Container from '@mui/system/Container'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import { GET_AUTH_USER } from '@/const'
 import Grid from '@mui/material/Grid'
 import InputField from '@/components/InputField'
 import Typography from '@mui/material/Typography'
@@ -54,7 +55,7 @@ const Login = () => {
 		try {
 			const respuesta = await axios({
 				method: 'post',
-				url: 'http://localhost:8080/api/v1/usuario',
+				url: GET_AUTH_USER(),
 				data: createUser(nombre, password),
 				headers: {
 					'Access-Control-Allow-Origin': '*',

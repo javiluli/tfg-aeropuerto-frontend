@@ -1,4 +1,4 @@
-import { urls } from '@/const/index'
+import { GET_ALL_AEROPUERTOS } from '@/const/index'
 
 function getAeropuertos() {
 	const fetchData = {
@@ -9,7 +9,7 @@ function getAeropuertos() {
 		},
 	}
 
-	return fetch(urls.GET_AEROPUERTOS, fetchData)
+	return fetch(GET_ALL_AEROPUERTOS(), fetchData)
 		.then((response) => response.text())
 		.then((response) => {
 			let data = JSON.parse(response)

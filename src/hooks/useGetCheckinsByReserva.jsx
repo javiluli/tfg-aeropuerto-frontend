@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { GET_CHECKINS_BY__ID_RESERVA } from '@/const'
 import axios from 'axios'
 
 function useGetCheckinsByReserva(id) {
@@ -7,7 +8,7 @@ function useGetCheckinsByReserva(id) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
 
-	const url = `http://localhost:8080/api/v1/checkins/${id}`
+	const url = GET_CHECKINS_BY__ID_RESERVA(id)
 	const config = {
 		headers: {
 			'Access-Control-Allow-Origin': '*',

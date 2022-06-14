@@ -45,7 +45,7 @@ const CardOfReserva = ({ reserva }) => {
 	return (
 		<Box>
 			<Typography variant="h5" component="h2">
-				Datos de la reserva
+				Datos sobre el avion
 			</Typography>
 			<TableContainer component={Paper} style={{ marginBottom: '2em' }}>
 				<Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">

@@ -59,9 +59,11 @@ const Vuelos = () => {
 	const [vueloIda, setVueloIda] = useState(null)
 	const [vueloVuelta, setVueloVuelta] = useState(null)
 
-	const [reservado, setReservado] = useState(false)
+	const [reservadoIda, setReservadoIda] = useState(false)
+	const [reservadoVuelta, setReservadoVuelta] = useState(false)
 
-	const [idReserva, setIdReserva] = useState(false)
+	const [idReservaIda, setIdReservaIda] = useState(false)
+	const [idReservaVuelta, setIdReservaVuelta] = useState(false)
 
 	return (
 		<Grid container spacing={6}>
@@ -74,8 +76,9 @@ const Vuelos = () => {
 					<MultiStepForm
 						initialValues={initialValues}
 						onSubmit={(values) => {
-							handleSubmit(values, setIdReserva)
-							setReservado(true)
+							handleSubmit(values, setIdReservaIda, setIdReservaVuelta)
+							setReservadoIda(true)
+							vueloVuelta ? setReservadoVuelta(true) : null
 						}}
 					>
 						{/* Vuelos de ida */}
@@ -114,91 +117,112 @@ const Vuelos = () => {
 
 							<Grid container spacing={2}>
 								{vueloIda !== null ? (
-									<Grid item xs={12} lg={6}>
-										<Box>
-											<Typography
-												align="left"
-												variant="h5"
-												component="h2"
-												style={{
-													fontWeight: 300,
-												}}
-											>
-												Ida
-											</Typography>
+									<Grid
+										item
+										container
+										direction="row"
+										justifyContent="center"
+										alignItems="center"
+										xs={12}
+										md={6}
+										style={{
+											padding: '1em',
+											backgroundColor: 'white',
+											boxShadow: '0 0 10px hsla(0, 0%, 0%, 0.1)',
+											borderRadius: '1em',
+										}}
+									>
+										<Grid xs={6} md={6}>
+											<Box>
+												<Typography align="left" variant="h5" component="h2">
+													Ida
+												</Typography>
 
-											<Typography
-												align="left"
-												variant="body1"
-												component="p"
-												style={{
-													fontWeight: 900,
-												}}
-											>
-												{vueloIda.vuelo.programa.origen.ciudad} - {vueloIda.vuelo.programa.destino.ciudad}
-											</Typography>
+												<Typography align="left" variant="body2" component="p">
+													{vueloIda.vuelo.programa.origen.ciudad} - {vueloIda.vuelo.programa.destino.ciudad}
+												</Typography>
 
-											<Typography align="left" variant="body1" component="p">
-												{vueloIda.vuelo.fechaSalida} / {vueloIda.vuelo.horaSalida}
-											</Typography>
+												<Typography align="left" variant="body1" component="p">
+													{vueloIda.vuelo.fechaSalida} / {vueloIda.vuelo.horaSalida}
+												</Typography>
 
-											<Typography align="left" variant="body1" component="p">
-												{vueloIda.vuelo.programa.origen.ciudad} - {vueloIda.vuelo.programa.origen.nombre}
-											</Typography>
-										</Box>
+												<Typography align="left" variant="body1" component="p">
+													{vueloIda.vuelo.programa.origen.nombre} - {vueloIda.vuelo.programa.origen.nombre}
+												</Typography>
+											</Box>
+										</Grid>
+
+										<Grid item xs={6} md={6}>
+											{reservadoIda ? (
+												<Box>
+													<Box style={{ height: 'auto', margin: '0 auto', maxWidth: 128, width: '100%' }}>
+														<QRCode
+															size={256}
+															style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
+															value={`https://proyecto-beyond.netlify.app/reserva?idreserva=${idReservaIda}`}
+															viewBox={`0 0 256 256`}
+														/>
+													</Box>
+												</Box>
+											) : null}
+										</Grid>
 									</Grid>
 								) : null}
 
 								{vueloVuelta !== null ? (
-									<Grid item xs={12} lg={6}>
-										<Box>
-											<Typography
-												align="left"
-												variant="h5"
-												component="h2"
-												style={{
-													fontWeight: 300,
-												}}
-											>
-												Vuelta
-											</Typography>
+									<Grid
+										item
+										container
+										direction="row"
+										justifyContent="center"
+										alignItems="center"
+										xs={12}
+										md={6}
+										style={{
+											padding: '1em',
+											backgroundColor: 'white',
+											boxShadow: '0 0 10px hsla(0, 0%, 0%, 0.1)',
+											borderRadius: '1em',
+										}}
+									>
+										<Grid xs={6} md={6}>
+											<Box>
+												<Typography align="left" variant="h5" component="h2">
+													Vuelta
+												</Typography>
 
-											<Typography
-												align="left"
-												variant="body1"
-												component="p"
-												style={{
-													fontWeight: 900,
-												}}
-											>
-												{vueloVuelta.vuelo.programa.origen.ciudad} - {vueloVuelta.vuelo.programa.destino.ciudad}
-											</Typography>
+												<Typography align="left" variant="body2" component="p">
+													{vueloVuelta.vuelo.programa.origen.ciudad} - {vueloVuelta.vuelo.programa.destino.ciudad}
+												</Typography>
 
-											<Typography align="left" variant="body1" component="p">
-												{vueloVuelta.vuelo.fechaSalida} / {vueloVuelta.vuelo.horaSalida}
-											</Typography>
+												<Typography align="left" variant="body1" component="p">
+													{vueloVuelta.vuelo.fechaSalida} / {vueloVuelta.vuelo.horaSalida}
+												</Typography>
 
-											<Typography align="left" variant="body1" component="p">
-												{vueloVuelta.vuelo.programa.origen.ciudad} - {vueloVuelta.vuelo.programa.origen.nombre}
-											</Typography>
-										</Box>
+												<Typography align="left" variant="body2" component="p">
+													{vueloVuelta.vuelo.programa.origen.nombre} - {vueloVuelta.vuelo.programa.destino.nombre}
+												</Typography>
+											</Box>
+										</Grid>
+										<Grid xs={6} md={6}>
+											{reservadoIda && (
+												<Box>
+													<div style={{ height: 'auto', margin: '0 auto', maxWidth: 128, width: '100%' }}>
+														<QRCode
+															size={256}
+															style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
+															value={`https://proyecto-beyond.netlify.app/reserva?idreserva=${idReservaVuelta}`}
+															viewBox={`0 0 256 256`}
+														/>
+													</div>
+												</Box>
+											)}
+										</Grid>
 									</Grid>
 								) : null}
 							</Grid>
 
-							{reservado && (
-								<Box>
-									<Typography>Reserva completada! Su reserva se identifica con: {idReserva}</Typography>
-									<div style={{ height: 'auto', margin: '0 auto', maxWidth: 64, width: '100%' }}>
-										<QRCode
-											size={256}
-											style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
-											value={`http://localhost:3000/reserva?idreserva=${idReserva}`}
-											viewBox={`0 0 256 256`}
-										/>
-									</div>
-								</Box>
-							)}
+							{/* <Typography>Reserva completada! Su reserva se identifica con: {idReserva}</Typography> */}
 						</FormStep>
 					</MultiStepForm>
 				</Container>
@@ -228,11 +252,11 @@ function createPasajero(idReserva, nombre, apellidos, dni, email) {
 
 const randomID = () => Math.random().toString(36).substring(2, 10)
 
-const handleSubmit = (data, onIdReserva) => {
+const handleSubmit = (data, onIdReservaIda, onIdReservaVuelta) => {
 	const { vueloIda, vueloVuelta, nombre, apellidos, dni, email } = data
 
 	const idReservaIda = randomID()
-	onIdReserva(idReservaIda)
+	onIdReservaIda(idReservaIda)
 	const newReservaIda = {
 		reserva: reservaObj(idReservaIda, vueloIda, new Date()),
 		pasajeros: [createPasajero(idReservaIda, nombre, apellidos, dni, email)],
@@ -242,6 +266,7 @@ const handleSubmit = (data, onIdReserva) => {
 	// si el tipo de villete es ida y vuelta o la fecha de vuelta no es nula
 	if (vueloVuelta !== null) {
 		const idReservaVuelta = randomID()
+		onIdReservaVuelta(idReservaVuelta)
 		const newReservaVuelta = {
 			reserva: reservaObj(idReservaVuelta, vueloVuelta, new Date()),
 			pasajeros: [createPasajero(idReservaVuelta, nombre, apellidos, dni, email)],

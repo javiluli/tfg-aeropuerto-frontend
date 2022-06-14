@@ -1,9 +1,11 @@
+import { GET_ALL_PROGRAMAS } from '@/const'
 import axios from 'axios'
 
 const getAllProgramas = async () => {
-	const URL = 'http://localhost:8080/api/v1/programas/all'
+	const url = GET_ALL_PROGRAMAS()
+
 	try {
-		const respuesta = await axios.get(URL, {
+		const respuesta = await axios.get(url, {
 			headers: {
 				'Access-Control-Allow-Origin': '*',
 				'Content-Type': 'application/json',

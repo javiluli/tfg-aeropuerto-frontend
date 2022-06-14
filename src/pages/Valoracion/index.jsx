@@ -9,7 +9,6 @@ import Stack from '@mui/material/Stack'
 import StarIcon from '@mui/icons-material/Star'
 import axios from 'axios'
 import useFetch from '@/hooks/useFetch'
-import useFetch2 from '@/hooks/useFetch2'
 
 const rngUserName = () => Math.random().toString(36).substring(2, 10)
 
@@ -37,30 +36,6 @@ function getLabelText(value) {
 	return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`
 }
 
-// const getIpClient = async () => {
-// 	const fetchData = {
-// 		method: 'GET',
-// 		mode: 'no-cors',
-// 		headers: {
-// 			'Access-Control-Allow-Origin': '*',
-// 			'Content-Type': 'application/json',
-// 		},
-// 	}
-
-// 	fetch('https://api.ipify.org?format=json', fetchData)
-// 		.then((response) => response.text())
-// 		.then((response) => {
-// 			console.log(response)
-// 		})
-
-// 	try {
-// 		const response = await axios.get('https://api.ipify.org?format=json')
-// 		console.log(response)
-// 	} catch (error) {
-// 		console.error(error)
-// 	}
-// }
-
 const initAnonimo = () => {
 	let user = votacion(rngUserName(), 0)
 	localStorage.setItem('usuarioAnonimo', JSON.stringify(user))
@@ -79,7 +54,7 @@ const index = () => {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(null)
 
-	const { data: allValoraciones } = useFetch('http://localhost:8080/api/v1/valoraciones/all')
+	const { data: allValoraciones } = useFetch('https://proyecto-beyond.herokuapp.com/api/v1/valoraciones/all')
 
 	// en caso de que no exista en el localStorage un usuario anonimo
 	if (usuarioAnonimo === null) {
@@ -109,7 +84,7 @@ const index = () => {
 
 	const saveValoracion = (newValue) => {
 		axios
-			.post('http://localhost:8080/api/v1/valoraciones/save', {
+			.post('https://proyecto-beyond.herokuapp.com/api/v1/valoraciones/save', {
 				user: nameUser,
 				valoracion: value,
 			})
@@ -126,7 +101,7 @@ const index = () => {
 
 	const getAllValoraciones = () => {
 		axios
-			.get('http://localhost:8080/api/v1/valoraciones/all')
+			.get('https://proyecto-beyond.herokuapp.com/api/v1/valoraciones/all')
 			.then((response) => {
 				console.log(response)
 				return response.data

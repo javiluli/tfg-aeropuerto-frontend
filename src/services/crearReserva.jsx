@@ -1,5 +1,7 @@
+import { POST_RESERVA } from '@/const'
+
 function crearReserva(newReserva) {
-	const URL = `http://localhost:8080/api/v1/reservas`
+	const url = POST_RESERVA()
 
 	const fetchData = {
 		method: 'POST',
@@ -10,7 +12,7 @@ function crearReserva(newReserva) {
 		},
 	}
 
-	return fetch(URL, fetchData)
+	return fetch(url, fetchData)
 		.then((response) => response.text())
 		.then((response) => {
 			return true
